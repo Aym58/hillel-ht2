@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/hillel-ht2/static/css/main.46109f86.css",
+    "main.js": "/hillel-ht2/static/js/main.60a94632.js",
+    "static/js/787.098b28ed.chunk.js": "/hillel-ht2/static/js/787.098b28ed.chunk.js",
+    "index.html": "/hillel-ht2/index.html",
+    "main.46109f86.css.map": "/hillel-ht2/static/css/main.46109f86.css.map",
+    "main.60a94632.js.map": "/hillel-ht2/static/js/main.60a94632.js.map",
+    "787.098b28ed.chunk.js.map": "/hillel-ht2/static/js/787.098b28ed.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.46109f86.css",
+    "static/js/main.60a94632.js"
+  ]
+}
