@@ -1,9 +1,9 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './home';
-import Popular from './popular';
-import Battle from './battle';
-import Nav from './nav';
+import Home from './components/home';
+import Popular from './components/popular';
+import Battle from './components/battle';
+import Nav from './components/nav';
 
 const App = () => {
 	return (

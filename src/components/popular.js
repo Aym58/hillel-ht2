@@ -1,13 +1,17 @@
-import { useState, useEffect, useRef } from 'react';
-import { fetchPopularRepos } from './Api.js';
+import { useState, useEffect } from 'react';
+import { fetchPopularRepos } from '../Api.js';
 
 import SelectedLanguages from './selectedLanguages.js';
 
 import Repos from './repos.js';
 import Loader from './loader.js';
+import { useSearchParams } from 'react-router-dom';
 
 const Popular = () => {
-	const [selectedLanguage, setSelectedLanguage] = useState('All');
+	const [searchParams, setSearchParams] = useSearchParams();
+	const [selectedLanguage, setSelectedLanguage] = useState(
+		searchParams.get('language') ? searchParams.get('language') : 'All'
+	);
 	const [repos, setRepos] = useState([]);
 	const [loader, setLoader] = useState(false);
 
@@ -17,10 +21,11 @@ const Popular = () => {
 			setRepos(data);
 			setLoader(false);
 		});
-	}, [selectedLanguage]);
+	}, [selectedLanguage, searchParams]);
 
 	const selectedLanguageHandler = (language) => {
 		setSelectedLanguage(language);
+		setSearchParams({ language: language });
 	};
 
 	return (

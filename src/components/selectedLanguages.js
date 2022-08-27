@@ -1,5 +1,3 @@
-import { memo } from 'react';
-
 const SelectedLanguages =
 	/*memo(*/
 	(props) => {
