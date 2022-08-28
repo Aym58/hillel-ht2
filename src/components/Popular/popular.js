@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchPopularRepos } from '../Api.js';
+import { fetchPopularRepos } from '../../Api.js';
 
 import SelectedLanguages from './selectedLanguages.js';
 
@@ -9,29 +9,25 @@ import { useSearchParams } from 'react-router-dom';
 
 const Popular = () => {
 	const [searchParams, setSearchParams] = useSearchParams();
-	const [selectedLanguage, setSelectedLanguage] = useState(
-		searchParams.get('language') ? searchParams.get('language') : 'All'
-	);
 	const [repos, setRepos] = useState([]);
 	const [loader, setLoader] = useState(false);
 
 	useEffect(() => {
 		setLoader(true);
-		fetchPopularRepos(selectedLanguage).then((data) => {
+		fetchPopularRepos(searchParams.get('language') || 'All').then((data) => {
 			setRepos(data);
 			setLoader(false);
 		});
-	}, [selectedLanguage, searchParams]);
+	}, [searchParams]);
 
 	const selectedLanguageHandler = (language) => {
-		setSelectedLanguage(language);
 		setSearchParams({ language: language });
 	};
 
 	return (
 		<div>
 			<SelectedLanguages
-				selectedLanguage={selectedLanguage}
+				selectedLanguage={searchParams.get('language') || 'All'}
 				selectedLanguageHandler={selectedLanguageHandler}
 				isDisabled={loader}
 			/>
