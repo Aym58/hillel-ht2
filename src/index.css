@@ -104,6 +104,7 @@ li {
 }
 
 .column {
+	margin-top: 20px;
 	display: flex;
 	flex-direction: column;
 	width: 500px;
@@ -174,4 +175,41 @@ li {
 	100% {
 		transform: rotate(360deg);
 	}
+}
+
+.results {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.results-header {
+	height: 120px;
+	margin-top: 20px;
+}
+
+.player-info {
+	min-height: 300px;
+	margin-top: 20px;
+	margin-left: 20%;
+	margin-right: 20%;
+	font-size: 16px;
+}
+
+.results h1,
+h2,
+h3 {
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	margin: 10px;
+	height: 30px;
+}
+
+.error-screen {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	margin-top: 200px;
 }
