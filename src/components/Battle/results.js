@@ -23,11 +23,11 @@ const Results = () => {
 			searchParams.get('playerTwoName'),
 		])
 			.then((data) => {
-				console.log(data);
 				setPlayers(data);
 				setWinner(data[0].profile.login);
 				setLoser(data[1].profile.login);
 				setLoader(false);
+				setError('');
 			})
 			.catch((err) => {
 				setError(err);
