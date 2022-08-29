@@ -5,10 +5,11 @@ const sec = 'YOUR_SECRET_ID';
 const params = '?client_id=' + id + '?client_secret=' + sec;
 
 const handleError = (error) => {
-	console.error(error);
+	console.log(error);
 };
 
 const getProfile = (username) => {
+	console.log(username);
 	return axios
 		.get('https://api.github.com/users/' + username + params)
 		.then((user) => user.data)
@@ -16,6 +17,7 @@ const getProfile = (username) => {
 };
 
 const getRepos = (username) => {
+	console.log(username);
 	return axios
 		.get('https://api.github.com/users/' + username + '/repos' + params)
 		.then((user) => user.data)
@@ -35,6 +37,7 @@ const calculateScore = (profile, repos) => {
 };
 
 const getUserData = (username) => {
+	console.log(username);
 	return axios
 		.all([getProfile(username), getRepos(username)])
 		.then(([profile, repos]) => {

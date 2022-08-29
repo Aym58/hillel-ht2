@@ -4,7 +4,7 @@ import { fetchPopularRepos } from '../../Api.js';
 import SelectedLanguages from './selectedLanguages.js';
 
 import Repos from './repos.js';
-import Loader from './loader.js';
+import Loader from '../../loader.js';
 import { useSearchParams } from 'react-router-dom';
 
 const Popular = () => {
