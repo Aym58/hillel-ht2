@@ -60,7 +60,7 @@ export const battle = (players) => {
 		.catch((err) => handleError(err));
 };
 
-export const fetchPopularRepos = (language) => {
+export const fetchPopularReposHttpRequest = (language) => {
 	const encodeURI = window.encodeURI(
 		'https://api.github.com/search/repositories?q=stars:>1+language:' +
 			language +

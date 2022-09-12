@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { fetchPopularRepos } from '../../Api.js';
+
+import { useDispatch, useSelector } from 'react-redux';
 
 import SelectedLanguages from './selectedLanguages.js';
 
@@ -7,21 +8,39 @@ import Repos from './repos.js';
 import Loader from '../../loader.js';
 import { useSearchParams } from 'react-router-dom';
 
+import { setSelectedLanguage } from '../../redux/popular/popular.actions.js';
+
+import { fetchPopularRepos } from '../../redux/popular/popular.thunk.js';
+
 const Popular = () => {
+	const dispatch = useDispatch();
+
+	const selectedLanguage = useSelector(
+		(state) => state.popularReducer.selectedLanguage
+	);
+
+	console.log('selectedLanguage ', selectedLanguage);
+
 	const [searchParams, setSearchParams] = useSearchParams();
-	const [repos, setRepos] = useState([]);
+
+	const repos = useSelector((state) => state.popularReducer.repos);
+
 	const [loader, setLoader] = useState(false);
 
 	useEffect(() => {
-		setLoader(true);
-		fetchPopularRepos(searchParams.get('language') || 'All').then((data) => {
-			setRepos(data);
-			setLoader(false);
-		});
-	}, [searchParams]);
+		dispatch(fetchPopularRepos(selectedLanguage));
+		/*setLoader(true);
+		fetchPopularReposHttpRequest(searchParams.get('language') || 'All').then(
+			(data) => {
+				setRepos(data);
+				setLoader(false);
+			}
+		);*/
+	}, [selectedLanguage]);
 
 	const selectedLanguageHandler = (language) => {
 		setSearchParams({ language: language });
+		dispatch(setSelectedLanguage(language));
 	};
 
 	return (
