@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 const PlayerInput = (props) => {
 	const [userName, setUserName] = useState('');
-
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		props.onSubmit(props.id, userName);
