@@ -2,7 +2,7 @@ import {
 	fetchPopularReposRequest,
 	fetchPopularReposSuccess,
 	fetchPopularReposFailure,
-} from './popular.actions';
+} from './popular.slice';
 
 import { fetchPopularReposHttpRequest } from '../../Api';
 

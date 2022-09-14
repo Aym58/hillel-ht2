@@ -1,10 +1,12 @@
-import { createStore, applyMiddleware } from 'redux';
-import { createLogger } from 'redux-logger';
+import { configureStore } from '@reduxjs/toolkit';
+import popularReducer from './popular/popular.slice';
+import battleReducer from './battle/battle.slice';
 import thunk from 'redux-thunk';
-import { rootReducer } from './root.reducer';
 
-const logger = createLogger({ collapsed: true });
-
-const store = createStore(rootReducer, applyMiddleware(thunk, logger));
-
-export default store;
+export const store = configureStore({
+	reducer: {
+		popular: popularReducer,
+		battle: battleReducer,
+	},
+	middleware: [thunk],
+});

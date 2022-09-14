@@ -1,40 +1,53 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+	updatePlayerOneName,
+	updatePlayerTwoName,
+	updatePlayerOneImage,
+	updatePlayerTwoImage,
+} from '../../redux/battle/battle.slice';
 import PlayerInput from './playerInput';
 import PlayerPreview from './playerPreview';
 
 const Battle = () => {
-	const [playerOneName, setPlayerOneName] = useState('');
-	const [playerTwoName, setPlayerTwoName] = useState('');
-	const [playerOneImage, setPlayerOneImage] = useState(null);
-	const [playerTwoImage, setPlayerTwoImage] = useState(null);
+	const dispatch = useDispatch();
+	const playerOneName = useSelector((state) => state.battle.playerOneName);
+	const playerTwoName = useSelector((state) => state.battle.playerTwoName);
+	const playerOneImage = useSelector((state) => state.battle.playerOneImage);
+	const playerTwoImage = useSelector((state) => state.battle.playerTwoImage);
 
 	const location = useLocation();
-
 	const handleSubmit = (id, userName) => {
 		if (id === 'playerOne') {
-			setPlayerOneName(userName);
-			setPlayerOneImage(`https://github.com/${userName}.png?size=200`);
+			dispatch(updatePlayerOneName(userName));
+			dispatch(
+				updatePlayerOneImage(`https://github.com/${userName}.png?size=200`)
+			);
 		}
-
 		if (id === 'playerTwo') {
-			setPlayerTwoName(userName);
-			setPlayerTwoImage(`https://github.com/${userName}.png?size=200`);
+			dispatch(updatePlayerTwoName(userName));
+			dispatch(
+				updatePlayerTwoImage(`https://github.com/${userName}.png?size=200`)
+			);
 		}
 	};
 
 	const handleReset = (id) => {
-		console.log(id);
 		if (id === 'playerOne') {
-			setPlayerOneName('');
-			setPlayerOneImage(null);
+			dispatch(updatePlayerOneName(''));
+			dispatch(updatePlayerOneImage(null));
 		}
-
 		if (id === 'playerTwo') {
-			setPlayerTwoName('');
-			setPlayerTwoImage(null);
+			dispatch(updatePlayerTwoName(''));
+			dispatch(updatePlayerTwoImage(null));
 		}
 	};
+
+	useEffect(() => {
+		handleReset('playerOne');
+		handleReset('playerTwo');
+	}, []);
 
 	return (
 		<div>
@@ -46,7 +59,7 @@ const Battle = () => {
 						onSubmit={handleSubmit}
 					/>
 				) : (
-					<PlayerPreview username={playerOneName} avatar={playerOneImage}>
+					<PlayerPreview playerNum={0}>
 						<button className='reset' onClick={() => handleReset('playerOne')}>
 							Reset
 						</button>
@@ -59,7 +72,7 @@ const Battle = () => {
 						onSubmit={handleSubmit}
 					/>
 				) : (
-					<PlayerPreview username={playerTwoName} avatar={playerTwoImage}>
+					<PlayerPreview playerNum={1}>
 						<button className='reset' onClick={() => handleReset('playerTwo')}>
 							Reset
 						</button>

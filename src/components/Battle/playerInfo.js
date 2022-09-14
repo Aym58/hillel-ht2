@@ -1,5 +1,10 @@
+import { useSelector } from 'react-redux';
+
 const PlayerInfo = (props) => {
-	const info = props.playerData;
+	const info = useSelector(
+		(state) => state.battle.players[props.playerNum].profile
+	);
+
 	return (
 		<div className='player-info'>
 			<ul>
